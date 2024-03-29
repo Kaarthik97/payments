@@ -154,3 +154,9 @@ def accept(web_form, data, docname=None, for_payment=False):
                 remove_file_by_url(f, doctype=doc.doctype, name=doc.name)
  
     frappe.flags.web_form_doc = doc
+    
+    if for_payment:
+		# this is needed for Payments app
+        return web_form.get_payment_gateway_url(doc)
+    else:
+        return doc
