@@ -90,7 +90,7 @@ def get_doc(reference_doctype,reference_docname):
 def event_form_status_change(reference_doctype,reference_docname):
        event_doc = get_doc(reference_doctype,reference_docname)
        event_doc.status = "Paid"
-       event_doc.save()
+       event_doc.save(ignore_permissions=True)
        
 def update_event_participants(reference_doctype,reference_docname, razorpay_payment_id):
         event_form_doc = get_doc(reference_doctype,reference_docname)
