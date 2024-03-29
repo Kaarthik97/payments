@@ -3,7 +3,7 @@ import json
 import frappe
 from frappe.core.doctype.file.utils import remove_file_by_url
 from frappe.rate_limiter import rate_limit
-from frappe.utils import flt
+from frappe.utils import flt,validate_email_address
 from frappe.website.doctype.web_form.web_form import WebForm
  
 from payments.utils import get_payment_gateway_controller
@@ -59,7 +59,10 @@ def accept(web_form, data, docname=None, for_payment=False):
     """Save the web form"""
     data = frappe._dict(json.loads(data))
     for_payment = frappe.parse_json(for_payment)
- 
+    email_id = data["email_id"]
+    email_verified = validate_email_address(email_id)
+    if email_verified == "":
+        frappe.throw("Please enter valid email id")
     docname = docname or data.name
  
     files = []
