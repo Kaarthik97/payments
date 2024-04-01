@@ -95,12 +95,13 @@ def event_form_status_change(reference_doctype,reference_docname):
 def update_event_participants(reference_doctype,reference_docname, razorpay_payment_id):
         event_form_doc = get_doc(reference_doctype,reference_docname)
         first_name = event_form_doc.first_name
-        last_name = event_form_doc.last_name
+        email = event_form_doc.email_id
         event_name = event_form_doc.event
         doctype = "Events"
         event_doc = get_doc(doctype, event_name)
         event_child = event_doc.append("participants", {})
-        event_child.name1 =  f"{first_name} {last_name}"
+        event_child.name1 =  f"{first_name}"
+        event_child.email_id = email
         event_child.date = datetime.now().strftime("%Y-%m-%d:%H-%M-%S")
         event_child.contact_no = event_form_doc.mobile_number
         event_child.transaction_id = razorpay_payment_id
