@@ -20,7 +20,11 @@
 	{% endif %}
 </div>
 <style>
+    .navbar.navbar-light.navbar-expand-lg{
+        display:none;
+    }
 {% include "templates/styles/card_style.css" %}
+
 </style>
 <script>
 	frappe.ready(function() {
@@ -30,5 +34,6 @@
 			}, 4000);
 		}
 	})
+    
 </script>
 {% endblock %}
