@@ -109,6 +109,7 @@ def update_event_participants(reference_doctype,reference_docname, razorpay_paym
         event_child.contact_no = event_form_doc.mobile_number
         event_child.transaction_id = razorpay_payment_id
         event_child.paid_status = "Paid"
+        event_child.reference_docname = reference_docname
         event_child.save(ignore_permissions=True)
         
         
