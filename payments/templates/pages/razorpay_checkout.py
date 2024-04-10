@@ -95,11 +95,12 @@ def event_form_status_change(reference_doctype,reference_docname):
        
 def update_event_participants(reference_doctype,reference_docname, razorpay_payment_id):
         event_form_doc = get_doc(reference_doctype,reference_docname)
-        ist_time_zone = pytz.timezone('Asia/Kolkata')
-        ist_time = ist_time_zone.localize(datetime.now())
-        check_time = str(ist_time)
-        ist_str = check_time.split(".")[0]
-        ist_strp_time = datetime.strptime(ist_str, "%Y-%m-%d %H:%M:%S")
+        # ist_time_zone = pytz.timezone('Asia/Kolkata')
+        now_time = datetime.now()
+        # ist_time = ist_time_zone.localize(datetime.now())
+        # check_time = str(ist_time)
+        # ist_str = check_time.split(".")[0]
+        # ist_strp_time = datetime.strptime(ist_str, "%Y-%m-%d %H:%M:%S")
         first_name = event_form_doc.first_name
         email = event_form_doc.email_id
         event_name = event_form_doc.event
@@ -108,7 +109,7 @@ def update_event_participants(reference_doctype,reference_docname, razorpay_paym
         event_child = event_doc.append("participants", {})
         event_child.name1 =  f"{first_name}"
         event_child.email_id = email
-        event_child.date = ist_strp_time
+        event_child.date = now_time
         event_child.contact_no = event_form_doc.mobile_number
         event_child.transaction_id = razorpay_payment_id
         event_child.paid_status = "Paid"
